@@ -82,7 +82,7 @@
         return (
           <div className="fixed inset-0 -z-10 bg-[#f0f0f0]">
             {/* 
-              Strictly load local 'background.png' as per user request.
+              Strictly load local 'background.png'.
             */}
             <img 
               src="./background.png"
@@ -104,8 +104,8 @@
               <a 
                 key={item} 
                 href={`#${item.toLowerCase()}`} 
-                // Changed to explicit gray color without mix-blend-mode for better visibility
-                className="text-xs font-bold tracking-widest text-zinc-500 hover:text-zinc-800 transition-colors drop-shadow-sm"
+                // Darker gray for better visibility (zinc-600)
+                className="text-xs font-bold tracking-widest text-zinc-600 hover:text-zinc-900 transition-colors drop-shadow-sm"
               >
                 {item}
               </a>
@@ -135,11 +135,11 @@
         }, []);
 
         return (
-          // Changed padding-top to 35vh to move it lower
-          <main className="fixed inset-0 flex flex-col justify-start pt-[35vh] items-center z-10 pointer-events-none p-4">
+          // FIXED: justify-end + pb-[15vh] ensures it stays at the bottom
+          <main className="fixed inset-0 flex flex-col justify-end pb-[15vh] items-center z-10 pointer-events-none p-4">
              <div className="relative">
-                {/* Changed text size to 8vw (smaller) */}
-                <h1 className="font-typewriter text-[8vw] leading-none text-center ink-text tracking-tighter">
+                {/* FIXED: text-[6vw] for smaller size */}
+                <h1 className="font-typewriter text-[6vw] leading-none text-center ink-text tracking-tighter">
                   {displayedText}
                   <span className="animate-blink ml-1 text-ink/50">|</span>
                 </h1>
