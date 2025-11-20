@@ -52,11 +52,10 @@
         color: #1a1a1a;
         overflow: hidden;
       }
-      /* Paper texture blend */
+      /* Paper texture blend for main text only */
       .ink-text {
         mix-blend-mode: multiply;
         color: #1a1a1a;
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
       }
     </style>
   <script type="importmap">
@@ -84,7 +83,6 @@
           <div className="fixed inset-0 -z-10 bg-[#f0f0f0]">
             {/* 
               Strictly load local 'background.png' as per user request.
-              Removed fallback to Unsplash.
             */}
             <img 
               src="./background.png"
@@ -106,7 +104,8 @@
               <a 
                 key={item} 
                 href={`#${item.toLowerCase()}`} 
-                className="text-xs font-bold tracking-widest text-ink/60 hover:text-ink transition-colors ink-text"
+                // Changed to explicit gray color without mix-blend-mode for better visibility
+                className="text-xs font-bold tracking-widest text-zinc-500 hover:text-zinc-800 transition-colors drop-shadow-sm"
               >
                 {item}
               </a>
@@ -116,7 +115,7 @@
       );
 
       const TypewriterTitle = () => {
-        const fullText = "VWOOvwoo"; // Updated text casing
+        const fullText = "VWOOvwoo"; 
         const [displayedText, setDisplayedText] = useState("");
         const [isTyping, setIsTyping] = useState(true);
 
@@ -124,7 +123,7 @@
           let index = 0;
           const interval = setInterval(() => {
             if (index < fullText.length) {
-              setDisplayedText((prev) => prev + fullText.charAt(index));
+              setDisplayedText((prev) => fullText.substring(0, index + 1));
               index++;
             } else {
               setIsTyping(false);
@@ -136,9 +135,11 @@
         }, []);
 
         return (
-          <main className="fixed inset-0 flex flex-col justify-center pt-[15vh] items-center z-10 pointer-events-none p-4">
+          // Changed padding-top to 35vh to move it lower
+          <main className="fixed inset-0 flex flex-col justify-start pt-[35vh] items-center z-10 pointer-events-none p-4">
              <div className="relative">
-                <h1 className="font-typewriter text-[12.5vw] leading-none text-center ink-text tracking-tighter">
+                {/* Changed text size to 8vw (smaller) */}
+                <h1 className="font-typewriter text-[8vw] leading-none text-center ink-text tracking-tighter">
                   {displayedText}
                   <span className="animate-blink ml-1 text-ink/50">|</span>
                 </h1>
